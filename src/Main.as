@@ -1,5 +1,5 @@
 // c 2024-06-17
-// m 2024-06-18
+// m 2024-06-19
 
 MwId         loadedGhostId = MwId();
 const string title         = "\\$FFF" + Icons::Refresh + "\\$G Replays++";
@@ -20,8 +20,6 @@ void RenderMenu() {
     if (UI::MenuItem(title, "", S_Enabled))
         S_Enabled = !S_Enabled;
 }
-
-uint16 stringOffset = 0;
 
 void Render() {
     if (
@@ -70,105 +68,8 @@ void Render() {
                     if (UI::Button("nullify ghost"))
                         @ghost = null;
 
-                    stringOffset = UI::InputInt("string offset", stringOffset, 4);
-                    UI::SameLine();
-                    if (UI::Button("check"))
-                        print("string at offset " + stringOffset + ": " + Dev::GetOffsetString(ghost, stringOffset));
-
                     if (ghost !is null) {
                         UI::BeginTabBar("##tabs-CGameGtnGhost", UI::TabBarFlags::FittingPolicyScroll);
-                            // if (UI::BeginTabItem("API values")) {
-                            //     if (UI::BeginTable("##table-api-values", 2, UI::TableFlags::Resizable | UI::TableFlags::RowBg | UI::TableFlags::ScrollY)) {
-                            //         UI::PushStyleColor(UI::Col::TableRowBgAlt, vec4(0.0f, 0.0f, 0.0f, 0.5f));
-
-                            //         UI::TableSetupScrollFreeze(0, 1);
-                            //         UI::TableSetupColumn("name");
-                            //         UI::TableSetupColumn("type");
-                            //         UI::TableSetupColumn("size (B)");
-                            //         UI::TableHeadersRow();
-
-                            //         UI::TableNextRow();
-                            //         UI::TableNextColumn();
-                            //         UI::Text("Duration");
-                            //         UI::TableNextColumn();
-                            //         UI::Text("uint");
-                            //         UI::TableNextColumn();
-                            //         UI::Text("4");
-
-                            //         UI::TableNextRow();
-                            //         UI::TableNextColumn();
-                            //         UI::Text("Size");
-                            //         UI::TableNextColumn();
-                            //         UI::Text(tostring(ghost.Size));
-
-                            //         UI::TableNextRow();
-                            //         UI::TableNextColumn();
-                            //         UI::Text("ModelIdentName");
-                            //         UI::TableNextColumn();
-                            //         UI::Text(IntToHex(ghost.ModelIdentName.Value) + " | " + ghost.ModelIdentName.GetName());
-
-                            //         UI::TableNextRow();
-                            //         UI::TableNextColumn();
-                            //         UI::Text("ModelIdentAuthor");
-                            //         UI::TableNextColumn();
-                            //         UI::Text(IntToHex(ghost.ModelIdentAuthor.Value) + " | " + ghost.ModelIdentAuthor.GetName());
-
-                            //         UI::TableNextRow();
-                            //         UI::TableNextColumn();
-                            //         UI::Text("ModelIdentCollection");
-                            //         UI::TableNextColumn();
-                            //         UI::Text(tostring(ghost.ModelIdentCollection));
-
-                            //         UI::TableNextRow();
-                            //         UI::TableNextColumn();
-                            //         UI::Text("ModelIdentCollection_Text");
-                            //         // UI::TableNextColumn();
-                            //         // UI::Text(tostring(ghost.ModelIdentCollection_Text));
-
-                            //         UI::PopStyleColor();
-                            //         UI::EndTable();
-                            //     }
-
-                            //     UI::EndTabItem();
-                            // }
-
-                            if (UI::BeginTabItem("API Offsets")) {
-                                if (UI::BeginTable("##table-api-offsets", 4, UI::TableFlags::Resizable | UI::TableFlags::RowBg | UI::TableFlags::ScrollY)) {
-                                    UI::PushStyleColor(UI::Col::TableRowBgAlt, vec4(0.0f, 0.0f, 0.0f, 0.5f));
-
-                                    UI::TableSetupScrollFreeze(0, 1);
-                                    UI::TableSetupColumn("name");
-                                    // UI::TableSetupColumn("type");
-                                    // UI::TableSetupColumn("size (B)");
-                                    UI::TableSetupColumn("offset (dec)");
-                                    UI::TableSetupColumn("offset (hex)");
-                                    // UI::TableSetupColumn("value");
-                                    UI::TableHeadersRow();
-
-                                    const Reflection::MwClassInfo@ info = Reflection::GetType("CGameCtnGhost");
-
-                                    for (uint i = 0; i < info.Members.Length; i++) {
-                                        const Reflection::MwMemberInfo@ member = info.Members[i];
-
-                                        UI::TableNextRow();
-
-                                        UI::TableNextColumn();
-                                        UI::Text(member.Name);
-
-                                        UI::TableNextColumn();
-                                        UI::Text(tostring(member.Offset));
-
-                                        UI::TableNextColumn();
-                                        UI::Text(IntToHex(member.Offset));
-                                    }
-
-                                    UI::PopStyleColor();
-                                    UI::EndTable();
-                                }
-
-                                UI::EndTabItem();
-                            }
-
                             if (UI::BeginTabItem("Raw Offsets")) {
                                 if (UI::BeginTable("##table-offsets", 2, UI::TableFlags::RowBg | UI::TableFlags::ScrollY)) {
                                     UI::PushStyleColor(UI::Col::TableRowBgAlt, vec4(0.0f, 0.0f, 0.0f, 0.5f));
