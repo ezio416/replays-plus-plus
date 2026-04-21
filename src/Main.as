@@ -484,7 +484,7 @@ void PlayAgainst() {
         return;
     }
 
-    const string settings = string::Join({
+    const string settings = Text::Join({
         "<root>",
         "<setting name=\"S_TimeLimit\" value=\"-1\" type=\"integer\"/>",
         "<setting name=\"S_ForceLapsNb\" value=\"-1\" type=\"integer\"/>",
